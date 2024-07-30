@@ -17,8 +17,8 @@ func (*Egts) NewClient(addr string, clientID uint32) *EgtsClient {
 	return NewClient(addr, clientID)
 }
 
-func (*Egts) SendPacket(ctx context.Context, client *EgtsClient, lat, lon float64, sensVal uint32, fuelLvl uint32) {
-	if err := client.SendPacket(ctx, lat, lon, sensVal, fuelLvl); err != nil {
+func (*Egts) SendPacket(ctx context.Context, client *EgtsClient, ts int64, lat, lon float64, sensVal uint32, fuelLvl uint32) {
+	if err := client.SendPacket(ctx, ts, lat, lon, sensVal, fuelLvl); err != nil {
 		log.Println(err)
 	}
 }

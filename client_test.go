@@ -81,7 +81,7 @@ func TestSendPacket(t *testing.T) {
 		Samples: make(chan<- stats.SampleContainer, 5),
 	})
 
-	assert.NoError(t, c.SendPacket(ctx, 55.55389399769574, 37.43236696287812, 0, 0))
+	assert.NoError(t, c.SendPacket(ctx, 1721753490, 55.55389399769574, 37.43236696287812, 0, 0))
 
 }
 

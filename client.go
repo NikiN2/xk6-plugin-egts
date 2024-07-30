@@ -24,7 +24,7 @@ type EgtsClient struct {
 	recordNumber uint32
 }
 
-func (c *EgtsClient) SendPacket(ctx context.Context, lat, lon float64, sensVal uint32, fuelLvl uint32) error {
+func (c *EgtsClient) SendPacket(ctx context.Context, ts int64, lat, lon float64, sensVal uint32, fuelLvl uint32) error {
 	state := lib.GetState(ctx)
 	if state == nil {
 		return errors.New("state is empty")
@@ -33,7 +33,8 @@ func (c *EgtsClient) SendPacket(ctx context.Context, lat, lon float64, sensVal u
 	if c.Conn == nil {
 		return errors.New("empty connection")
 	}
-	p := c.createPacket(time.Now().UTC(), lat, lon, sensVal, fuelLvl)
+	t := time.Unix(ts, 0)
+	p := c.createPacket(t, lat, lon, sensVal, fuelLvl)
 	receivedTime := time.Now().UTC()
 	n, err := c.Conn.Write(p)
 	if err != nil {
